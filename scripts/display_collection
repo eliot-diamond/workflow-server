@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#GDA_WORKSPACE_GIT=/dls_sw/i23/software/gda/workspace_git /dls_sw/i23/software/gda_versions/gda_9_6/workspace_git/gda-mx.git/plugins/com.globalphasing.wf-prototype-devel/etc/display_collection -xml /dls/i23/data/2017/nt14493-89/astra/astra-persistence-layer.xml -detail | less
+
+. `dirname $0`/astra
+echo "CLASSPATH=$CLASSPATH"
+java -version
+
+java \
+-Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* \
+-Dco.gphl.wf.logging.level=ALL \
+-Dco.gphl.wf.use_acknowledge=F \
+-Dfile.encoding=UTF-8 \
+-Djava.util.logging.SimpleFormatter.format='%2$s %5$s%6$s%n' \
+-classpath $CLASSPATH \
+co.gphl.sdcp.DisplayCollection \
+"$@"
+
+#-beamline "jms:jndi:dynamicQueues/WF.QUEUE?replyToName=dynamicQueues/GDA.QUEUE&jndiURL=$BROKER_URI&enactmentId=$ASTRA_enactmentId&timeToLive=5000" \
+#-wdir $ASTRA_wdir \
+#-persistname astra \
+#-wfprefix transcal \
+#-calibration TransCal \
+#-propertyfile /dls_sw/i23/etc/astra/config/workflow.properties \
+#-file /dls_sw/i23/etc/astra/config/transcal_2stage.dat \
+#-newconfig

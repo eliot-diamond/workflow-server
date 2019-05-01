@@ -1,0 +1,8 @@
+/.attach_*
+/.classpath
+/.project
+/build
+/bin
+/external_libs
+/lib
+/.gradle

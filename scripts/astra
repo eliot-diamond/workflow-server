@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo "BROKER_URI=$BROKER_URI"
+
+echo "GDA_WORKSPACE_GIT=$GDA_WORKSPACE_GIT"
+
+export CLASSPATH=\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/slf4j.api_1.7.25.jar:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/log4j.over.slf4j_1.7.25.jar:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/ch.qos.logback.core_1.2.3.jar:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/ch.qos.logback.classic_1.2.3.jar:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/javax.jms_1.1.0.v201205091237.jar:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/javax.management.j2ee-api_1.1.2.jar:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/org.apache.activemq.activemq-osgi_5.15.6.jar:\
+$GDA_WORKSPACE_GIT/gda-mx.git/plugins/com.globalphasing.astra-wf-devel/lib/commons-cli-1.2.jar:\
+$GDA_WORKSPACE_GIT/gda-mx.git/plugins/com.globalphasing.astra-wf-devel/lib/ASTRAWorkflows.jar:\
+$GDA_WORKSPACE_GIT/gda-mx.git/plugins/com.globalphasing.astra-wf-devel/lib:\
+$GDA_WORKSPACE_GIT/gphl-astra.git/com.globalphasing.astra.messagebus/bin:\
+$GDA_WORKSPACE_GIT/gphl-astra.git/com.globalphasing.astra.messages/bin:\
+$GDA_WORKSPACE_GIT/gphl-sdcp-common.git/com.globalphasing.gcal.aux/bin:\
+$GDA_WORKSPACE_GIT/gphl-abstract-beamline.git/com.globalphasing.sdcp.abstract_beamline/bin:\
+$GDA_WORKSPACE_GIT/gphl-sdcp-common.git/com.globalphasing.sdcp.common/bin:\
+$GDA_WORKSPACE_GIT/../workspace/tp/plugins/com.thoughtworks.xstream_1.3.1.v201111240924.jar:\
+$GDA_WORKSPACE_GIT/gda-mx.git/plugins/com.globalphasing.astra-wf-devel/lib/xbean_xpath.jar:\
+$GDA_WORKSPACE_GIT/gda-mx.git/plugins/com.globalphasing.astra-wf-devel/lib/saxon9he.jar:\
+$GDA_WORKSPACE_GIT/gda-mx.git/plugins/com.globalphasing.astra-wf-devel/lib/org.apache.servicemix.bundles.xmlbeans-2.6.0_2.jar
+
+# module unload java
+
+#export BDG_home=/dls_sw/apps/GPhL/astra/

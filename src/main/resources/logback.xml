@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="10" debug="true"> <!-- Add debug="true" in here to log the logging configuration -->
+	<!-- define scope="context" name="JVMNAME" class="gda.util.logging.JvmNamePropertyDefiner" /-->
+	
+	<logger name="org.apache.activemq.ActiveMQSession" level="INFO" />
+	<logger name="org.apache.activemq.transport.AbstractInactivityMonitor" level="INFO" />
+
+	<appender name="LOGSERVER" class="ch.qos.logback.classic.net.SocketAppender">
+		<!--  RemoteHost>${gda.server.host}</RemoteHost-->
+		<RemoteHost>localhost</RemoteHost>
+		<!--  Port>${gda.server.logging.port}</Port-->
+		<Port>6788</Port>
+		<ReconnectionDelay>10000</ReconnectionDelay>
+		<IncludeCallerData>true</IncludeCallerData>
+	</appender>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date %-5level %logger - %m%n%rEx</Pattern>
+		</layout>
+	</appender>
+
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="LOGSERVER" />
+	</root>
+
+</configuration>

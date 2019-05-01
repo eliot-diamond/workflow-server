@@ -1,0 +1,29 @@
+#!/bin/bash
+
+. `dirname $0`/astra
+#echo "CLASSPATH=$CLASSPATH"
+#java -version
+
+mkdir -p $ASTRA_wdir
+
+java \
+-Dorg.apache.activemq.SERIALIZABLE_PACKAGES=* \
+-Dco.gphl.wf.logging.level=ALL \
+-Dco.gphl.wf.use_acknowledge=F \
+-Dfile.encoding=UTF-8 \
+-Djava.util.logging.SimpleFormatter.format='%2$s %5$s%6$s%n' \
+-classpath $CLASSPATH \
+co.gphl.wf.workflows.WFSimpleCharToProcessing \
+-beamline "jms:jndi:dynamicQueues/WF.QUEUE?replyToName=dynamicQueues/GDA.QUEUE&jndiURL=$BROKER_URI&enactmentId=$ASTRA_enactmentId&timeToLive=5000" \
+-wdir $ASTRA_wdir \
+-persistname $ASTRA_persistname \
+-wfprefix stratcal \
+-samplesubdir \
+-charpattern generic \
+-pattern interleaved \
+-ibpattern ib_interleaved \
+-strategy InitialCharacterisation \
+-propertyfile /dls_sw/i23/etc/astra/config/workflow.properties \
+-appdir astra_analysis
+
+#-rootsubdir astra \

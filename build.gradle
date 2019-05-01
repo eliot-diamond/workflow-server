@@ -1,0 +1,65 @@
+//run gradle clean build bootJar
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'workflow-server'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+    	url = "http://localhost:8081/repository/maven-public/"
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+	astraVersion = "0.1.GDA-RELEASE"
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-activemq")
+    compile("org.apache.activemq:activemq-broker")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+	
+	runtime ("com.globalphasing:astra-messagebus:${astraVersion}")
+	runtime ("com.globalphasing:astra-messages:${astraVersion}")
+	runtime ("com.globalphasing:gcal-aux:${astraVersion}")
+	runtime ("com.globalphasing:sdcp-abstract-beamline:${astraVersion}")
+	runtime ("com.globalphasing:sdcp-common:${astraVersion}")
+}
+
+task cleanExternalDependencies (type: Delete) {
+	delete "$rootDir/external_libs/"
+}
+
+clean.dependsOn(cleanExternalDependencies)
+
+task copyExternalDependencies (type: Copy) {
+	into "$rootDir/external_libs"
+	from configurations.runtime.filter { 
+		it.name.startsWith("astra-messagebus") ||
+		it.name.startsWith("astra-messages") ||
+		it.name.startsWith("gcal-aux") ||
+		it.name.startsWith("sdcp-abstract-beamline") ||
+		it.name.startsWith("sdcp-common")
+	}
+}
+
+build.dependsOn(copyExternalDependencies)
