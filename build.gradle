@@ -22,7 +22,7 @@ bootJar {
 repositories {
     mavenCentral()
     maven {
-    	url = "http://localhost:8081/repository/maven-public/"
+    	url = "http://mavenrepo.diamond.ac.uk/repository/maven-releases/"
     }
 }
 
@@ -30,7 +30,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 ext {
-	astraVersion = "0.1.GDA-RELEASE"
+	astraVersion = "1.0.0.GDA-RELEASE"
 }
 
 dependencies {
@@ -38,11 +38,11 @@ dependencies {
     compile("org.apache.activemq:activemq-broker")
     compile("com.fasterxml.jackson.core:jackson-databind")
 	
-	runtime ("com.globalphasing:astra-messagebus:${astraVersion}")
-	runtime ("com.globalphasing:astra-messages:${astraVersion}")
-	runtime ("com.globalphasing:gcal-aux:${astraVersion}")
-	runtime ("com.globalphasing:sdcp-abstract-beamline:${astraVersion}")
-	runtime ("com.globalphasing:sdcp-common:${astraVersion}")
+	runtime ("com.globalphasing.astra:messagebus:${astraVersion}")
+	runtime ("com.globalphasing.astra:messages:${astraVersion}")
+	runtime ("com.globalphasing.gcal:aux:${astraVersion}")
+	runtime ("com.globalphasing.sdcp:abstract_beamline:${astraVersion}")
+	runtime ("com.globalphasing.sdcp:common:${astraVersion}")
 }
 
 task cleanExternalDependencies (type: Delete) {
